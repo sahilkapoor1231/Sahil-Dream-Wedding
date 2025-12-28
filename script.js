@@ -1,14 +1,6 @@
 // ===============================
-// Sahil & Dream - Full script.js (FINAL UPDATED)
-// ✅ Loader
-// ✅ AOS
-// ✅ Music: STARTS IMMEDIATELY on page open (muted autoplay allowed by browsers)
-// ✅ Music becomes audible on FIRST interaction anywhere (click/touch/scroll/key)
-// ✅ Yellow button still works to pause/play
-// ✅ Countdown
-// ✅ PDF Download
+// Sahil & Dream - Full script.js (Autoplay strongest possible)
 // ===============================
-
 
 // 1. LOADER LOGIC
 function removeLoader() {
@@ -18,7 +10,6 @@ function removeLoader() {
     setTimeout(() => {
       loader.style.display = "none";
 
-      // Load QR Code only when page loads to save bandwidth
       const qrEl = document.getElementById("venue-qr");
       const venueUrl =
         "https://goo.gl/maps/search/?api=1&query=Golden+Apple+Vikas+Puri+Delhi";
@@ -31,13 +22,8 @@ function removeLoader() {
   }
 }
 
-// Remove loader when page is fully loaded
-window.addEventListener("load", () => {
-  setTimeout(removeLoader, 1500);
-});
-// Fail-safe: Force remove after 4 seconds if window.load misses
+window.addEventListener("load", () => setTimeout(removeLoader, 1500));
 setTimeout(removeLoader, 4000);
-
 
 // 2. INIT ANIMATIONS (AOS)
 document.addEventListener("DOMContentLoaded", () => {
@@ -46,10 +32,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-
-// 3. MUSIC (AUTOPLAY ON OPEN + UNMUTE ON FIRST INTERACTION)
-let isPlaying = false;       // Means: playing with sound OR user-controlled
-let autoplayMutedStarted = false;
+// 3. MUSIC (AUTOPLAY ON OPEN - MUTED; UNMUTE ON FIRST ACTION)
+let userPaused = false;
 
 function setMusicUI(playing) {
   const icon = document.getElementById("audio-icon");
@@ -59,90 +43,96 @@ function setMusicUI(playing) {
     icon.classList.remove("fa-music", "fa-pause");
     icon.classList.add(playing ? "fa-pause" : "fa-music");
   }
+  if (pulse) pulse.style.animation = playing ? "ripple 2s infinite" : "none";
+}
 
-  if (pulse) {
-    pulse.style.animation = playing ? "ripple 2s infinite" : "none";
+function tryAutoPlayMuted(where = "unknown") {
+  const audio = document.getElementById("bg-music");
+  if (!audio || userPaused) return;
+
+  // Force muted autoplay attempt
+  audio.muted = true;
+  audio.setAttribute("muted", ""); // important for some Safari cases
+  audio.volume = 0.7;
+  audio.loop = true;
+  audio.preload = "auto";
+
+  const p = audio.play();
+  if (p && typeof p.then === "function") {
+    p.then(() => {
+      // It IS playing (muted). Most people won't "hear" it, but it's running.
+      console.log("✅ Muted autoplay started from:", where);
+      setMusicUI(true);
+    }).catch((e) => {
+      console.warn("❌ Muted autoplay blocked from:", where, e);
+      setMusicUI(false);
+    });
   }
 }
 
-// Autoplay attempt as soon as page opens
-window.addEventListener("load", () => {
+// Fire autoplay attempts at multiple lifecycle points (strongest approach)
+document.addEventListener("DOMContentLoaded", () => tryAutoPlayMuted("DOMContentLoaded"));
+window.addEventListener("load", () => tryAutoPlayMuted("window.load"));
+setTimeout(() => tryAutoPlayMuted("timeout-500"), 500);
+setTimeout(() => tryAutoPlayMuted("timeout-1500"), 1500);
+
+// If audio becomes ready later, try again
+document.addEventListener("DOMContentLoaded", () => {
   const audio = document.getElementById("bg-music");
-  if (!audio) {
-    console.error("Audio element #bg-music not found");
-    return;
-  }
+  if (!audio) return;
 
-  audio.loop = true;
-  audio.preload = "auto";
-  audio.volume = 0.7;
-
-  // ✅ MUST be muted for autoplay to work across browsers
-  audio.muted = true;
-
-  audio.play().then(() => {
-    autoplayMutedStarted = true;
-
-    // UI: show it's "playing" (even though muted)
-    setMusicUI(true);
-
-    // Now unmute automatically on first user interaction ANYWHERE
-    const unmuteOnFirstAction = () => {
-      // If user already paused using button, don't force play
-      if (!autoplayMutedStarted) return;
-
-      audio.muted = false;
-      audio.play().catch(() => {});
-
-      isPlaying = true; // now considered playing with sound
-      setMusicUI(true);
-
-      document.removeEventListener("click", unmuteOnFirstAction);
-      document.removeEventListener("touchstart", unmuteOnFirstAction);
-      document.removeEventListener("scroll", unmuteOnFirstAction);
-      document.removeEventListener("keydown", unmuteOnFirstAction);
-    };
-
-    document.addEventListener("click", unmuteOnFirstAction, { once: true });
-    document.addEventListener("touchstart", unmuteOnFirstAction, { once: true });
-    document.addEventListener("scroll", unmuteOnFirstAction, { once: true, passive: true });
-    document.addEventListener("keydown", unmuteOnFirstAction, { once: true });
-
-  }).catch((e) => {
-    console.warn("Muted autoplay blocked (rare):", e);
-
-    // If even muted autoplay is blocked, we keep UI off until user presses button
-    setMusicUI(false);
-  });
+  audio.addEventListener("canplay", () => tryAutoPlayMuted("canplay"), { once: true });
+  audio.addEventListener("canplaythrough", () => tryAutoPlayMuted("canplaythrough"), { once: true });
 });
 
-// Yellow music button toggle (still works)
+// Unmute on FIRST interaction ANYWHERE (no need to click the icon)
+function unmuteAndKeepPlaying() {
+  const audio = document.getElementById("bg-music");
+  if (!audio || userPaused) return;
+
+  audio.muted = false;
+  audio.removeAttribute("muted");
+
+  audio.play().then(() => {
+    console.log("🔊 Unmuted after first interaction");
+    setMusicUI(true);
+  }).catch((e) => {
+    console.warn("Unmute/play failed:", e);
+  });
+
+  document.removeEventListener("click", unmuteAndKeepPlaying);
+  document.removeEventListener("touchstart", unmuteAndKeepPlaying);
+  document.removeEventListener("scroll", unmuteAndKeepPlaying);
+  document.removeEventListener("keydown", unmuteAndKeepPlaying);
+}
+
+document.addEventListener("click", unmuteAndKeepPlaying, { once: true });
+document.addEventListener("touchstart", unmuteAndKeepPlaying, { once: true });
+document.addEventListener("scroll", unmuteAndKeepPlaying, { once: true, passive: true });
+document.addEventListener("keydown", unmuteAndKeepPlaying, { once: true });
+
+// Yellow button toggle (manual control)
 function toggleAudio() {
   const audio = document.getElementById("bg-music");
   if (!audio) return;
 
-  // If currently playing -> pause
   if (!audio.paused) {
     audio.pause();
-    isPlaying = false;
-    autoplayMutedStarted = false; // prevent forced unmute later
+    userPaused = true;   // respect user choice
     setMusicUI(false);
     return;
   }
 
-  // If paused -> play (user click, so browser allows with sound)
-  audio.muted = false;
+  userPaused = false;
+  audio.muted = false;   // button click counts as gesture
+  audio.removeAttribute("muted");
   audio.volume = 0.7;
 
-  audio.play().then(() => {
-    isPlaying = true;
-    setMusicUI(true);
-  }).catch((e) => {
-    console.error("Play failed:", e);
-    alert("Browser blocked audio. Please interact once and try again.");
+  audio.play().then(() => setMusicUI(true)).catch((e) => {
+    console.error("Manual play failed:", e);
+    alert("Audio blocked by browser settings. Try opening in Chrome/Safari (not in-app browser).");
   });
 }
-
 
 // 4. COUNTDOWN TIMER
 const target = new Date("Feb 15, 2026 20:00:00").getTime();
@@ -171,22 +161,13 @@ setInterval(() => {
   }
 }, 1000);
 
-
 // 5. PDF DOWNLOAD
 function downloadPDF() {
   const element = document.getElementById("capture-area");
   const btn = document.getElementById("download-btn");
 
-  if (!element) {
-    alert("Capture area not found.");
-    return;
-  }
-  if (!btn) {
-    alert("Download button not found.");
-    return;
-  }
-
-  // Check if html2pdf is loaded
+  if (!element) return alert("Capture area not found.");
+  if (!btn) return alert("Download button not found.");
   if (typeof html2pdf === "undefined") {
     alert("PDF generator is still loading. Please wait a moment.");
     return;
