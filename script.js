@@ -1,10 +1,10 @@
-// 1. FAIL-SAFE LOADER REMOVAL
-// Ensures the user never gets stuck
+// 1. LOADER REMOVAL
 window.addEventListener('load', () => {
-    removeLoader();
+    // Artificial delay for smooth UX
+    setTimeout(removeLoader, 1500); 
 });
-// Fallback if load event misfires
-setTimeout(removeLoader, 3000);
+// Failsafe
+setTimeout(removeLoader, 4000);
 
 function removeLoader() {
     const loader = document.getElementById('loader');
@@ -14,23 +14,25 @@ function removeLoader() {
             loader.style.display = 'none';
         }, 800);
         
-        // Generate Dynamic QR for Venue
-        const venueLink = "https://goo.gl/maps/placeholder";
-        const qrEl = document.getElementById('qr-code');
-        if(qrEl) {
-            qrEl.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(venueLink)}`;
+        // GENERATE DYNAMIC QR CODE FOR MAIN VENUE
+        // Venue: Crystal Hall, Golden Apple, Vikas Puri
+        const venueMapUrl = "https://www.google.com/maps/search/?api=1&query=Golden+Apple+Vikas+Puri+New+Delhi";
+        const qrElement = document.getElementById('qr-code');
+        if(qrElement) {
+            // Using API to generate QR based on the map link
+            qrElement.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(venueMapUrl)}`;
         }
     }
 }
 
-// 2. ANIMATIONS
+// 2. AOS ANIMATION INIT
 AOS.init({
     duration: 1000,
     once: true,
     offset: 100
 });
 
-// 3. AUDIO PLAYER
+// 3. MUSIC PLAYER
 let isPlaying = false;
 const audio = document.getElementById('bg-music');
 const icon = document.getElementById('music-icon');
@@ -42,7 +44,7 @@ function toggleAudio() {
         icon.classList.add('fa-music');
         document.querySelector('.pulse-ring').style.animation = 'none';
     } else {
-        audio.play().catch(e => alert("Please interact with the document first"));
+        audio.play().catch(e => alert("Please interact with the screen first to play music."));
         icon.classList.remove('fa-music');
         icon.classList.add('fa-pause');
         document.querySelector('.pulse-ring').style.animation = 'ripple 2s infinite';
@@ -50,13 +52,14 @@ function toggleAudio() {
     isPlaying = !isPlaying;
 }
 
-// 4. COUNTDOWN
-const target = new Date("Feb 15, 2026 20:00:00").getTime();
+// 4. COUNTDOWN TIMER
+const weddingDate = new Date("Feb 15, 2026 20:00:00").getTime();
+
 setInterval(() => {
     const now = new Date().getTime();
-    const diff = target - now;
+    const diff = weddingDate - now;
 
-    if (diff > 0) {
+    if(diff > 0) {
         document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
         document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
@@ -64,22 +67,22 @@ setInterval(() => {
     }
 }, 1000);
 
-// 5. PDF GENERATION
+// 5. PDF GENERATION LOGIC
 function downloadPDF() {
     const element = document.getElementById('capture-area');
     const opt = {
         margin: 0,
-        filename: 'Sahil_Dream_Wedding.pdf',
+        filename: 'Sahil_Dream_Wedding_Invite.pdf',
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true },
-        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
     };
 
     const btn = document.querySelector('.btn-footer');
-    const oldHTML = btn.innerHTML;
-    btn.innerHTML = 'Generating...';
+    const oldText = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
 
     html2pdf().set(opt).from(element).save().then(() => {
-        btn.innerHTML = oldHTML;
+        btn.innerHTML = oldText;
     });
 }
