@@ -1,9 +1,14 @@
 // ===============================
-// Sahil & Dream - Full script.js (UPDATED)
-// - Loader + AOS + AUTOPLAY MUSIC (muted on load, unmute on first interaction)
-// - Countdown
-// - PDF Download
+// Sahil & Dream - Full script.js (FINAL UPDATED)
+// ✅ Loader
+// ✅ AOS
+// ✅ Music: STARTS IMMEDIATELY on page open (muted autoplay allowed by browsers)
+// ✅ Music becomes audible on FIRST interaction anywhere (click/touch/scroll/key)
+// ✅ Yellow button still works to pause/play
+// ✅ Countdown
+// ✅ PDF Download
 // ===============================
+
 
 // 1. LOADER LOGIC
 function removeLoader() {
@@ -33,6 +38,7 @@ window.addEventListener("load", () => {
 // Fail-safe: Force remove after 4 seconds if window.load misses
 setTimeout(removeLoader, 4000);
 
+
 // 2. INIT ANIMATIONS (AOS)
 document.addEventListener("DOMContentLoaded", () => {
   if (typeof AOS !== "undefined") {
@@ -40,14 +46,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// 3. AUDIO PLAYER (AUTOPLAY SAFE)
-// NOTE: For best results update your HTML audio tag to:
-// <audio id="bg-music" autoplay muted loop playsinline>
-//   <source src="assets/audio/wedding-music.mp3" type="audio/mpeg">
-// </audio>
 
-let isPlaying = false;        // User-facing state (playing with sound)
-let autoplayStarted = false;  // Internal state (muted autoplay started)
+// 3. MUSIC (AUTOPLAY ON OPEN + UNMUTE ON FIRST INTERACTION)
+let isPlaying = false;       // Means: playing with sound OR user-controlled
+let autoplayMutedStarted = false;
 
 function setMusicUI(playing) {
   const icon = document.getElementById("audio-icon");
@@ -57,105 +59,90 @@ function setMusicUI(playing) {
     icon.classList.remove("fa-music", "fa-pause");
     icon.classList.add(playing ? "fa-pause" : "fa-music");
   }
+
   if (pulse) {
     pulse.style.animation = playing ? "ripple 2s infinite" : "none";
   }
 }
 
-// Try autoplay (muted) on load, then unmute on first interaction
+// Autoplay attempt as soon as page opens
 window.addEventListener("load", () => {
   const audio = document.getElementById("bg-music");
-  if (!audio) return;
+  if (!audio) {
+    console.error("Audio element #bg-music not found");
+    return;
+  }
 
   audio.loop = true;
   audio.preload = "auto";
   audio.volume = 0.7;
 
-  // Start muted autoplay (allowed by most browsers)
+  // ✅ MUST be muted for autoplay to work across browsers
   audio.muted = true;
 
   audio.play().then(() => {
-    autoplayStarted = true;
-    // Keep UI as "not playing" until user unlocks sound OR presses button
-    setMusicUI(false);
+    autoplayMutedStarted = true;
+
+    // UI: show it's "playing" (even though muted)
+    setMusicUI(true);
+
+    // Now unmute automatically on first user interaction ANYWHERE
+    const unmuteOnFirstAction = () => {
+      // If user already paused using button, don't force play
+      if (!autoplayMutedStarted) return;
+
+      audio.muted = false;
+      audio.play().catch(() => {});
+
+      isPlaying = true; // now considered playing with sound
+      setMusicUI(true);
+
+      document.removeEventListener("click", unmuteOnFirstAction);
+      document.removeEventListener("touchstart", unmuteOnFirstAction);
+      document.removeEventListener("scroll", unmuteOnFirstAction);
+      document.removeEventListener("keydown", unmuteOnFirstAction);
+    };
+
+    document.addEventListener("click", unmuteOnFirstAction, { once: true });
+    document.addEventListener("touchstart", unmuteOnFirstAction, { once: true });
+    document.addEventListener("scroll", unmuteOnFirstAction, { once: true, passive: true });
+    document.addEventListener("keydown", unmuteOnFirstAction, { once: true });
+
   }).catch((e) => {
-    console.warn("Muted autoplay blocked:", e);
-    // Still wait for user interaction
+    console.warn("Muted autoplay blocked (rare):", e);
+
+    // If even muted autoplay is blocked, we keep UI off until user presses button
     setMusicUI(false);
   });
-
-  // On first interaction anywhere, unmute and play with sound
-  const unlockAudio = () => {
-    const a = document.getElementById("bg-music");
-    if (!a) return;
-
-    // If user already started via button, do nothing
-    if (isPlaying) return;
-
-    a.muted = false;
-
-    a.play().then(() => {
-      isPlaying = true;
-      setMusicUI(true);
-    }).catch((e) => {
-      console.warn("Unmute/play failed:", e);
-    });
-
-    document.removeEventListener("click", unlockAudio);
-    document.removeEventListener("touchstart", unlockAudio);
-    document.removeEventListener("scroll", unlockAudio);
-    document.removeEventListener("keydown", unlockAudio);
-  };
-
-  document.addEventListener("click", unlockAudio);
-  document.addEventListener("touchstart", unlockAudio);
-  document.addEventListener("scroll", unlockAudio, { passive: true });
-  document.addEventListener("keydown", unlockAudio);
 });
 
-// Music button toggle (still works)
+// Yellow music button toggle (still works)
 function toggleAudio() {
   const audio = document.getElementById("bg-music");
   if (!audio) return;
 
-  // If currently playing with sound -> pause
-  if (isPlaying) {
+  // If currently playing -> pause
+  if (!audio.paused) {
     audio.pause();
     isPlaying = false;
+    autoplayMutedStarted = false; // prevent forced unmute later
     setMusicUI(false);
     return;
   }
 
-  // If not playing -> play with sound (user click = allowed)
+  // If paused -> play (user click, so browser allows with sound)
   audio.muted = false;
+  audio.volume = 0.7;
 
   audio.play().then(() => {
     isPlaying = true;
     setMusicUI(true);
   }).catch((e) => {
     console.error("Play failed:", e);
-    alert("Your browser blocked autoplay. Please tap once on the page, then press the music button.");
+    alert("Browser blocked audio. Please interact once and try again.");
   });
 }
 
-// OPTIONAL: Smooth fade-in volume when unmuted (called only when isPlaying becomes true)
-function fadeInAudio(targetVol = 0.7, step = 0.05, interval = 120) {
-  const audio = document.getElementById("bg-music");
-  if (!audio) return;
-
-  audio.volume = 0;
-  let vol = 0;
-
-  const fade = setInterval(() => {
-    vol += step;
-    if (vol >= targetVol) {
-      audio.volume = targetVol;
-      clearInterval(fade);
-    } else {
-      audio.volume = vol;
-    }
-  }, interval);
-}
 
 // 4. COUNTDOWN TIMER
 const target = new Date("Feb 15, 2026 20:00:00").getTime();
@@ -173,9 +160,7 @@ setInterval(() => {
 
   if (diff > 0) {
     dEl.innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-    hEl.innerText = Math.floor(
-      (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
+    hEl.innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     mEl.innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     sEl.innerText = Math.floor((diff % (1000 * 60)) / 1000);
   } else {
@@ -185,6 +170,7 @@ setInterval(() => {
     sEl.innerText = "00";
   }
 }, 1000);
+
 
 // 5. PDF DOWNLOAD
 function downloadPDF() {
@@ -200,6 +186,7 @@ function downloadPDF() {
     return;
   }
 
+  // Check if html2pdf is loaded
   if (typeof html2pdf === "undefined") {
     alert("PDF generator is still loading. Please wait a moment.");
     return;
