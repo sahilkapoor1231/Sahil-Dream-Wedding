@@ -1,125 +1,166 @@
-:root {
-    --navy: #0F172A;
-    --navy-dark: #020617;
-    --gold: #D4AF37;
-    --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7);
-    --white: #ffffff;
-    --font-head: 'Cinzel', serif;
-    --font-body: 'Montserrat', sans-serif;
-    --font-script: 'Great Vibes', cursive;
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: var(--navy); color: var(--white); font-family: var(--font-body); overflow-x: hidden; width: 100%; }
-
-/* --- LOADER (With CSS Fail-Safe) --- */
-/* If JS fails, this animation forces the loader to hide after 8s so you aren't stuck */
-#loader {
-    position: fixed; inset: 0; background: var(--navy); z-index: 10000;
-    display: flex; justify-content: center; align-items: center;
-    transition: opacity 0.8s ease;
-    animation: safe-remove 0.1s linear 8s forwards;
-}
-@keyframes safe-remove { to { visibility: hidden; opacity: 0; pointer-events: none; } }
-
-.loader-box { text-align: center; width: 90%; max-width: 400px; }
-.monogram {
-    border: 3px solid var(--gold); width: 100px; height: 100px;
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-head); font-size: 2rem; color: var(--gold);
-    margin: 0 auto 20px; gap: 5px; animation: pulse 2s infinite;
-}
-.monogram .line { width: 2px; height: 30px; background: var(--gold); }
-.loading-bar { width: 150px; height: 3px; background: rgba(255,255,255,0.1); margin: 15px auto; overflow: hidden; }
-.bar-fill { width: 100%; height: 100%; background: var(--gold); animation: slide 2s infinite; }
-@keyframes slide { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
-@keyframes pulse { 50% { box-shadow: 0 0 30px rgba(212,175,55,0.3); } }
-
-/* --- HERO --- */
-.hero {
-    min-height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; text-align: center;
-    overflow: hidden;
-}
-.hero-bg {
-    position: absolute; inset: 0;
-    background: url('https://images.unsplash.com/photo-1519225421980-715cb0202128?q=80&w=1200') center/cover no-repeat;
-    filter: brightness(0.4);
-    background-attachment: fixed; /* Parallax */
-}
-.hero-text { position: relative; z-index: 2; padding: 20px; width: 100%; }
-.ornament { width: 100px; filter: invert(0.8) sepia(1) saturate(5) hue-rotate(5deg); margin: 10px 0; }
-.ornament.bottom { transform: rotate(180deg); }
-
-.names { font-family: var(--font-head); font-size: 3rem; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 10px 0; line-height: 1.2; }
-.weds-hero { font-family: var(--font-script); font-size: 2.5rem; color: white; -webkit-text-fill-color: white; display: block; margin: 5px 0; text-shadow: 0 0 10px rgba(0,0,0,0.5); }
-.tagline { letter-spacing: 3px; font-size: 0.8rem; color: #ccc; }
-
-.scroll-down { position: absolute; bottom: 30px; z-index: 2; color: var(--gold); display: flex; flex-direction: column; align-items: center; gap: 5px; animation: bounce 2s infinite; }
-@keyframes bounce { 50% { transform: translateY(-10px); } }
-
-/* --- SECTIONS --- */
-.section-padding { padding: 60px 15px; }
-.bg-royal { background-color: var(--navy); background-image: radial-gradient(#1e293b 1px, transparent 1px); background-size: 20px 20px; }
-.glass-card {
-    background: rgba(255,255,255,0.03); border: 1px solid var(--gold);
-    padding: 40px 15px; max-width: 800px; margin: 0 auto; text-align: center;
-    border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-}
-.ganesha { width: 60px; margin-bottom: 20px; filter: drop-shadow(0 0 5px var(--gold)); }
-.shloka { font-family: 'Playfair Display', serif; font-style: italic; color: var(--gold); margin-bottom: 20px; }
-.couple-block { display: flex; align-items: center; justify-content: center; gap: 15px; margin: 30px 0; flex-wrap: wrap; }
-.name h2 { font-family: var(--font-head); font-size: 1.8rem; color: var(--gold); }
-.weds-badge { border: 1px solid var(--gold); padding: 5px 10px; border-radius: 50%; font-size: 0.7rem; color: var(--gold); }
-
-/* --- EVENTS --- */
-.section-title { font-family: var(--font-head); color: var(--gold); font-size: 2rem; margin-bottom: 40px; text-align: center; }
-.timeline { display: flex; flex-direction: column; gap: 30px; max-width: 900px; margin: 0 auto; }
-.event-card { display: flex; background: var(--navy-dark); border: 1px solid rgba(212,175,55,0.3); border-radius: 10px; overflow: hidden; }
-.event-card.reverse { flex-direction: row-reverse; }
-.event-img { width: 40%; min-height: 200px; }
-.event-img img { width: 100%; height: 100%; object-fit: cover; }
-.event-info { width: 60%; padding: 20px; display: flex; flex-direction: column; justify-content: center; }
-
-.date-badge { background: var(--gold); color: var(--navy); padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.75rem; display: inline-block; margin-bottom: 10px; width: fit-content; }
-.btn-map { display: inline-block; margin-top: 10px; color: var(--gold); border: 1px solid var(--gold); padding: 6px 15px; text-decoration: none; font-size: 0.8rem; border-radius: 4px; width: fit-content; transition: 0.3s; }
-.btn-map:hover { background: var(--gold); color: var(--navy); }
-
-/* --- WEDDING CARD --- */
-.wedding-card { position: relative; background: url('https://images.unsplash.com/photo-1545041088-25650228d99f?q=80&w=1200') center/cover; padding: 5px; border-radius: 20px; margin-top: 20px; }
-.wedding-overlay { position: absolute; inset: 0; background: rgba(15, 23, 42, 0.9); border-radius: 20px; }
-.wedding-content { position: relative; z-index: 2; border: 1px solid var(--gold); padding: 40px 15px; text-align: center; border-radius: 15px; margin: 5px; }
-.badge-main { background: var(--gold); color: var(--navy); padding: 5px 20px; font-weight: bold; border-radius: 20px; font-size: 0.8rem; margin-bottom: 15px; display: inline-block; }
-.wedding-content h2 { font-family: var(--font-head); font-size: 2.2rem; color: var(--gold); margin-bottom: 10px; }
-.btn-main { display: inline-block; padding: 12px 30px; background: var(--gold-gradient); color: var(--navy); font-weight: bold; text-decoration: none; border-radius: 50px; font-size: 0.9rem; margin-top: 20px; }
-
-/* --- FOOTER --- */
-.footer { background: #000; padding: 60px 15px; margin-top: 50px; border-top: 1px solid #333; }
-#timer { display: flex; justify-content: center; gap: 10px; margin: 30px auto; flex-wrap: wrap; }
-.box { border: 1px solid var(--gold); color: var(--gold); padding: 10px; min-width: 65px; border-radius: 5px; text-align: center; flex: 0 1 auto; }
-.box span { display: block; font-size: 1.4rem; font-family: var(--font-head); color: white; }
-.box small { font-size: 0.6rem; text-transform: uppercase; }
-
-.actions { display: flex; justify-content: center; gap: 15px; margin-top: 30px; flex-wrap: wrap; }
-.btn-action { padding: 10px 25px; border: 1px solid var(--gold); background: transparent; color: var(--gold); border-radius: 50px; cursor: pointer; text-decoration: none; font-weight: bold; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
-.btn-action:hover { background: var(--gold); color: var(--navy); }
-.whatsapp { background: #25d366; border-color: #25d366; color: white; }
-
-/* --- MUSIC FAB --- */
-.music-fab-wrapper { position: fixed; bottom: 20px; right: 20px; z-index: 999; }
-.music-btn { width: 50px; height: 50px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--navy); cursor: pointer; position: relative; z-index: 2; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
-.pulse { position: absolute; inset: 0; border: 1px solid var(--gold); border-radius: 50%; animation: ripple 2s infinite; opacity: 0; pointer-events: none; }
-@keyframes ripple { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(2); opacity: 0; } }
-
-/* --- MOBILE OPTIMIZATION --- */
-@media (max-width: 768px) {
-    .names { font-size: 2.2rem; }
-    .weds-hero { font-size: 1.8rem; }
-    .hero-bg { background-attachment: scroll; } /* Fix Parallax on Mobile */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sahil & Dream | The Royal Union</title>
     
-    .event-card, .event-card.reverse { flex-direction: column; }
-    .event-img { width: 100%; height: 220px; }
-    .event-info { width: 100%; padding: 25px; }
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    .box { padding: 8px; min-width: 60px; }
-    .box span { font-size: 1.2rem; }
-}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="loader">
+        <div class="loader-box">
+            <div class="monogram">
+                <span>S</span><div class="line"></div><span>D</span>
+            </div>
+            <p style="color:white; margin-bottom:10px;">The Royal Union</p>
+            <div class="loading-bar"><div class="bar-fill"></div></div>
+        </div>
+    </div>
+
+    <div class="music-fab-wrapper">
+        <div class="music-btn" onclick="toggleAudio()">
+            <i class="fas fa-music" id="audio-icon"></i>
+        </div>
+        <div class="pulse" id="pulse-anim"></div>
+        <audio id="bg-music" loop>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+        </audio>
+    </div>
+
+    <main id="capture-area"> 
+
+        <header class="hero">
+            <div class="hero-bg"></div>
+            
+            <div class="hero-text" data-aos="zoom-in" data-aos-duration="1500">
+                <img src="https://www.svgrepo.com/show/332619/ornament-decoration.svg" class="ornament top" alt="deco">
+                <p class="tagline">WE INVITE YOU TO CELEBRATE</p>
+                <h1 class="names">Sahil <span class="weds-hero">Weds</span> Dream</h1>
+                <p class="date">15 FEBRUARY 2026</p>
+                <p class="venue">NEW DELHI, INDIA</p>
+                <img src="https://www.svgrepo.com/show/332619/ornament-decoration.svg" class="ornament bottom" alt="deco">
+            </div>
+
+            <div class="scroll-down">
+                <span>Scroll Down</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </header>
+
+        <section class="section-padding bg-royal">
+            <div class="glass-card" data-aos="fade-up">
+                <img src="https://cdn-icons-png.flaticon.com/512/3655/3655457.png" class="ganesha" alt="Ganesha">
+                <p class="shloka">|| Shree Ganeshay Namah ||</p>
+                <p class="invite-msg">Mrs. Savita & Mr. Naresh Kapoor <br>cordially invite you to the wedding ceremony of their son</p>
+                <div class="couple-block">
+                    <div class="name"><h2>Sahil</h2></div>
+                    <div class="connector"><span class="weds-badge">WEDS</span></div>
+                    <div class="name"><h2>Dream</h2></div>
+                </div>
+                <p class="invite-msg">(D/o Mrs. Indu & Mr. Suresh Kumar Budhiraja)</p>
+            </div>
+        </section>
+
+        <section class="section-padding">
+            <h2 class="section-title" data-aos="fade-down">Royal Festivities</h2>
+            <div class="timeline">
+                
+                <div class="event-card" data-aos="fade-right">
+                    <div class="event-img">
+                        <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=800&q=80" alt="Ring">
+                    </div>
+                    <div class="event-info">
+                        <span class="date-badge">05 FEB 2026</span>
+                        <h3>Sagan Ceremony</h3>
+                        <p class="details"><i class="far fa-clock"></i> 7:00 PM Onwards</p>
+                        <p class="loc"><i class="fas fa-map-marker-alt"></i> The City Park Hotel, Pitampura</p>
+                        <a href="https://goo.gl/maps/search/?api=1&query=City+Park+Hotel+Pitampura" target="_blank" class="btn-map">View Map</a>
+                    </div>
+                </div>
+
+                <div class="event-card reverse" data-aos="fade-left">
+                    <div class="event-img">
+                        <img src="https://images.unsplash.com/photo-1595981234058-a9302fbeb9e3?w=800&q=80" alt="Mehendi">
+                    </div>
+                    <div class="event-info">
+                        <span class="date-badge">13 FEB 2026</span>
+                        <h3>Mehendi & Sangeet</h3>
+                        <p class="details"><i class="far fa-clock"></i> 5:00 PM Onwards</p>
+                        <p class="loc"><i class="fas fa-map-marker-alt"></i> H.No 182, Sec-22, Rohini</p>
+                        <a href="https://goo.gl/maps/search/?api=1&query=Rohini+Sector+22" target="_blank" class="btn-map">View Map</a>
+                    </div>
+                </div>
+
+                <div class="event-card" data-aos="fade-right">
+                    <div class="event-img">
+                        <img src="https://images.unsplash.com/photo-1605218457297-5136e4f32810?w=800&q=80" alt="Haldi">
+                    </div>
+                    <div class="event-info">
+                        <span class="date-badge gold">15 FEB 2026</span>
+                        <h3>Haldi Ceremony</h3>
+                        <p class="details"><i class="far fa-clock"></i> 10:00 AM</p>
+                        <p class="loc"><i class="fas fa-map-marker-alt"></i> H.No 182, Sec-22, Rohini</p>
+                        <a href="https://goo.gl/maps/search/?api=1&query=Rohini+Sector+22" target="_blank" class="btn-map">View Map</a>
+                    </div>
+                </div>
+
+                <div class="wedding-card" data-aos="zoom-in">
+                    <div class="wedding-overlay"></div>
+                    <div class="wedding-content">
+                        <div class="badge-main">THE GRAND UNION</div>
+                        <h2>The Wedding</h2>
+                        <p style="letter-spacing:2px; margin:10px 0;">SUNDAY, 15 FEBRUARY 2026</p>
+                        <div style="color:#ccc; margin-bottom:20px;">
+                            <span><i class="fas fa-horse"></i> Baraat: 8:00 PM</span> &nbsp;|&nbsp; 
+                            <span><i class="fas fa-fire"></i> Pheras: Midnight</span>
+                        </div>
+                        <p>Crystal Hall, Golden Apple, Vikas Puri, New Delhi</p>
+                        <a href="https://goo.gl/maps/search/?api=1&query=Golden+Apple+Vikas+Puri+Delhi" target="_blank" class="btn-main">Navigate to Venue</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <footer class="footer">
+            <h2 style="font-family: 'Cinzel', serif; color:var(--gold); text-align:center;">Counting Down</h2>
+            
+            <div id="timer">
+                <div class="box"><span id="days">00</span><small>Days</small></div>
+                <div class="box"><span id="hours">00</span><small>Hrs</small></div>
+                <div class="box"><span id="mins">00</span><small>Mins</small></div>
+                <div class="box"><span id="secs">00</span><small>Secs</small></div>
+            </div>
+
+            <div class="qr-container" style="text-align: center;">
+                <img id="venue-qr" src="" alt="Venue QR" style="max-width: 140px; background:white; padding:10px; border-radius:10px;">
+                <p style="color: #666; font-size: 0.8rem; margin-top:5px;">Scan for Location</p>
+            </div>
+
+            <div class="actions">
+                <button id="download-btn" onclick="downloadPDF()" class="btn-action">
+                    <i class="fas fa-file-pdf"></i> Save Invite
+                </button>
+                <a href="https://wa.me/919999999999" class="btn-action whatsapp">
+                    <i class="fab fa-whatsapp"></i> RSVP
+                </a>
+            </div>
+            <p style="text-align:center; color:#555; font-size:0.8rem; margin-top:40px;">With Love: Kapoor & Budhiraja Family</p>
+        </footer>
+
+    </main>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
