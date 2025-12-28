@@ -3,191 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sahil & Dream | The Royal Wedding</title>
+    <title>Sahil & Dream | The Royal Union</title>
     
-    <meta property="og:title" content="Wedding Invitation: Sahil & Dream">
-    <meta property="og:description" content="We invite you to celebrate our union. 15th February 2026.">
-    <meta property="og:image" content="https://your-github-username.github.io/repo-name/images/couple-thumb.jpg">
-    <meta property="og:url" content="https://your-github-username.github.io/repo-name/">
-    <meta property="og:type" content="website">
+    <meta property="og:title" content="Wedding Invite: Sahil & Dream">
+    <meta property="og:description" content="Join us for the Big Fat Indian Wedding celebration! 15th Feb 2026.">
+    <meta property="og:image" content="https://your-github-username.github.io/repo/assets/couple-hero.jpg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Great+Vibes&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
     
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <link rel="stylesheet" href="style.css">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-    <div class="music-control" onclick="toggleMusic()">
+    <div id="loader">
+        <div class="loader-content">
+            <h2 class="cursive">Sahil & Dream</h2>
+            <p>Loading Love...</p>
+        </div>
+    </div>
+
+    <div class="music-fab" onclick="toggleAudio()">
+        <div class="waves">
+            <span></span><span></span><span></span>
+        </div>
         <i class="fas fa-music" id="music-icon"></i>
     </div>
-    <audio id="bg-music" loop>
-        <source src="wedding-song.mp3" type="audio/mp3">
+    <audio id="wedding-audio" loop>
+        <source src="assets/music.mp3" type="audio/mp3">
     </audio>
 
-    <header class="hero">
-        <div class="overlay"></div>
-        <div class="hero-content" data-aos="fade-up" data-aos-duration="2000">
-            <h3 class="cursive">We are getting married</h3>
-            <h1 class="couple-names">Sahil & Dream</h1>
-            <p class="date">15 . 02 . 2026</p>
-            <div class="scroll-indicator">
-                <span></span>
+    <header class="hero" id="home">
+        <div class="parallax-bg"></div>
+        <div class="hero-overlay">
+            <div class="hero-text">
+                <p class="tagline">The Big Fat Indian Wedding</p>
+                <h1 class="names">Sahil <span class="amp">&</span> Dream</h1>
+                <p class="date">February 15, 2026</p>
+                <div class="scroll-down">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
             </div>
         </div>
     </header>
 
-    <section class="intro section-padding">
+    <section class="invocation section-padding">
         <div class="container text-center">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Ganesha_Vector.svg/1200px-Ganesha_Vector.svg.png" alt="Ganesha" class="ganesha-icon" data-aos="zoom-in">
-            <h2 class="section-title" data-aos="fade-up">Shree Ganeshay Namah</h2>
-            <p class="verse" data-aos="fade-up" data-aos-delay="200">
-                "Paretu Kotani Santu, Punyantu Dasha Hatu Cha<br>
-                Garbha Dhana Dashami, Kulam Rakshatu Keshavah"
+            <img src="assets/ganesha.png" alt="Ganesha" class="ganesha-img">
+            <h2 class="section-title">Shree Ganeshay Namah</h2>
+            <p class="shloka">
+                "Vakratunda Mahakaya Surya Koti Samaprabha <br>
+                Nirvighnam Kuru Me Deva Sarva Karyeshu Sarvada"
             </p>
         </div>
     </section>
 
-    <section class="couple section-padding bg-cream">
+    <section class="couple section-padding">
         <div class="container">
-            <h2 class="section-title text-center" data-aos="fade-up">The Happy Couple</h2>
-            <div class="couple-grid">
-                <div class="person" data-aos="fade-right">
-                    <div class="img-frame">
-                        <img src="https://images.unsplash.com/photo-1595981234058-a9302fbeb9e3?q=80&w=1000&auto=format&fit=crop" alt="Groom">
+            <div class="couple-wrapper">
+                <div class="couple-card groom" data-aos="fade-right">
+                    <div class="img-box">
+                        <img src="assets/groom.jpg" alt="Sahil Kapoor">
                     </div>
-                    <h3>Sahil Kapoor</h3>
-                    <p>S/o Mr. Naresh Kapoor & Mrs. Savita Kapoor</p>
+                    <div class="info">
+                        <h3>Sahil Kapoor</h3>
+                        <p class="parents">S/o Mr. Naresh Kapoor & Mrs. Savita Kapoor</p>
+                    </div>
                 </div>
-                <div class="divider" data-aos="zoom-in">
+                
+                <div class="center-heart">
                     <i class="fas fa-heart"></i>
                 </div>
-                <div class="person" data-aos="fade-left">
-                    <div class="img-frame">
-                        <img src="https://images.unsplash.com/photo-1588663806744-9345c22534a6?q=80&w=1000&auto=format&fit=crop" alt="Bride">
+
+                <div class="couple-card bride" data-aos="fade-left">
+                    <div class="img-box">
+                        <img src="assets/bride.jpg" alt="Dream Budhiraja">
                     </div>
-                    <h3>Dream Budhiraja</h3>
-                    <p>D/o Mr. Suresh Kumar Budhiraja & Mrs. Indu Budhiraja</p>
+                    <div class="info">
+                        <h3>Dream Budhiraja</h3>
+                        <p class="parents">D/o Mr. Suresh Kumar Budhiraja & Mrs. Indu Budhiraja</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="events section-padding">
+    <section class="events section-padding" id="events">
         <div class="container">
-            <h2 class="section-title text-center text-white" data-aos="fade-up">Wedding Events</h2>
+            <h2 class="section-title text-center text-gold">The Celebrations</h2>
             
-            <div class="event-card" data-aos="fade-up">
-                <div class="event-date">
-                    <span class="day">05</span>
-                    <span class="month">Feb</span>
-                </div>
-                <div class="event-details">
-                    <h3>Sagan Ceremony</h3>
-                    <p class="time"><i class="far fa-clock"></i> 7:00 PM Onwards</p>
-                    <p class="location"><i class="fas fa-map-marker-alt"></i> The City Park Hotel, KP Block, Pitampura, New Delhi</p>
-                    <div class="map-link">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3499.6416867769966!2d77.1368943!3d28.6976933!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m12!1s0x390d03d09a067341%3A0xe7c02f1053006a6b!2sCity%20Park%20Hotel!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
-                    </div>
-                    <a href="https://maps.app.goo.gl/YourExactLinkHere" target="_blank" class="btn-gold">View Map</a>
-                </div>
-            </div>
-
-            <div class="event-card" data-aos="fade-up">
-                <div class="event-date">
-                    <span class="day">13</span>
-                    <span class="month">Feb</span>
-                </div>
-                <div class="event-details">
-                    <h3>Mehendi & DJ Night</h3>
-                    <p class="time"><i class="far fa-clock"></i> 5:00 PM Onwards</p>
-                    <p class="location"><i class="fas fa-map-marker-alt"></i> H.No 182 (UGF), Pocket-6, Sec-22, Rohini, New Delhi</p>
-                    <div class="map-link">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3498.0275997230626!2d77.063!3d28.748!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m12!1s0x390d01309d9418d5%3A0x6b4f746206774c82!2sSector%2022%2C%20Rohini%2C%20Delhi!5e0!3m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+            <div class="timeline">
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="date-badge">05 Feb</div>
+                        <h3>Sagan Ceremony</h3>
+                        <div class="details">
+                            <p><i class="far fa-clock"></i> Evening</p>
+                            <p><i class="fas fa-map-marker-alt"></i> The City Park Hotel, KP Block, Poorvi Pitampura, New Delhi</p>
+                        </div>
+                        <div class="actions">
+                            <a href="https://www.google.com/maps/search/?api=1&query=The+City+Park+Hotel+Pitampura+Delhi" target="_blank" class="btn-outline">View Map</a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="event-card" data-aos="fade-up">
-                <div class="event-date">
-                    <span class="day">15</span>
-                    <span class="month">Feb</span>
-                </div>
-                <div class="event-details">
-                    <h3>Haldi Ceremony</h3>
-                    <p class="time"><i class="far fa-clock"></i> 11:00 AM</p>
-                    <p class="location"><i class="fas fa-map-marker-alt"></i> H.No 182 (UGF), Pocket-6, Sec-22, Rohini, New Delhi</p>
-                </div>
-            </div>
-
-            <div class="event-card highlight-card" data-aos="zoom-in">
-                <div class="event-date gold-bg">
-                    <span class="day">15</span>
-                    <span class="month">Feb</span>
-                </div>
-                <div class="event-details">
-                    <h3>The Wedding Ceremony</h3>
-                    <p class="time"><i class="far fa-clock"></i> 8:00 PM - Baraat & Dinner</p>
-                    <p class="location"><i class="fas fa-map-marker-alt"></i> Crystal Hall, Golden Apple, Vikas Puri, New Delhi</p>
-                    <div class="map-link">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.876798835848!2d77.066!3d28.632!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m12!1s0x390d04c8965851f9%3A0x4386411516e87b7a!2sGolden%20Apple!5e0!3m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="date-badge">13 Feb</div>
+                        <h3>Mehendi & DJ Night</h3>
+                        <div class="details">
+                            <p><i class="far fa-clock"></i> Evening</p>
+                            <p><i class="fas fa-map-marker-alt"></i> H.No 182 (UGF), Pocket-6, Sec-22, Rohini, New Delhi</p>
+                        </div>
+                        <div class="actions">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Sector+22+Rohini+Delhi" target="_blank" class="btn-outline">View Map</a>
+                        </div>
                     </div>
-                    <a href="https://maps.app.goo.gl/YourExactLinkHere" target="_blank" class="btn-gold">Navigate</a>
                 </div>
-            </div>
 
-        </div>
-    </section>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="date-badge">15 Feb</div>
+                        <h3>Haldi Ceremony</h3>
+                        <div class="details">
+                            <p><i class="far fa-clock"></i> Morning</p>
+                            <p><i class="fas fa-map-marker-alt"></i> H.No 182 (UGF), Pocket-6, Sec-22, Rohini, New Delhi</p>
+                        </div>
+                        <div class="actions">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Sector+22+Rohini+Delhi" target="_blank" class="btn-outline">View Map</a>
+                        </div>
+                    </div>
+                </div>
 
-    <section class="countdown-section">
-        <div class="overlay-dark"></div>
-        <div class="container text-center relative-z">
-            <h2 class="cursive text-gold">Counting down to forever</h2>
-            <div id="timer" class="timer-container">
-                <div class="time-box"><span id="days">00</span>Days</div>
-                <div class="time-box"><span id="hours">00</span>Hours</div>
-                <div class="time-box"><span id="minutes">00</span>Mins</div>
-                <div class="time-box"><span id="seconds">00</span>Secs</div>
+                <div class="timeline-item highlight">
+                    <div class="timeline-content">
+                        <div class="date-badge gold">15 Feb</div>
+                        <h3>The Wedding Ceremony</h3>
+                        <div class="details">
+                            <p><i class="far fa-clock"></i> Night</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Crystal Hall, Golden Apple, Vikas Puri, New Delhi</p>
+                        </div>
+                        <div class="actions">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Golden+Apple+Vikas+Puri+Delhi" target="_blank" class="btn-filled">Navigate</a>
+                            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sahil+Weds+Dream&dates=20260215T143000Z/20260215T183000Z&details=Wedding+Ceremony+at+Golden+Apple&location=Golden+Apple+Vikas+Puri" target="_blank" class="btn-outline">Add to Calendar</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <section class="gallery section-padding bg-cream">
+    <section class="countdown">
+        <div class="overlay-dark">
+            <h2 class="cursive">The Beginning of Forever</h2>
+            <div id="timer">
+                <div class="box"><span id="d">00</span>Days</div>
+                <div class="box"><span id="h">00</span>Hrs</div>
+                <div class="box"><span id="m">00</span>Mins</div>
+                <div class="box"><span id="s">00</span>Secs</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery section-padding">
         <div class="container">
-            <h2 class="section-title text-center">Moments to Cherish</h2>
+            <h2 class="section-title text-center">Captured Moments</h2>
             <div class="gallery-grid">
-                <img src="https://images.unsplash.com/photo-1606216794074-735e77ce32f9?w=500&auto=format" data-aos="zoom-in">
-                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=500&auto=format" data-aos="zoom-in" data-aos-delay="100">
-                <img src="https://images.unsplash.com/photo-1595981234058-a9302fbeb9e3?w=500&auto=format" data-aos="zoom-in" data-aos-delay="200">
-                <img src="https://images.unsplash.com/photo-1583934555035-75d8628e9329?w=500&auto=format" data-aos="zoom-in" data-aos-delay="300">
+                <div class="g-item"><img src="assets/gallery1.jpg" alt="Moment 1"></div>
+                <div class="g-item"><img src="assets/gallery2.jpg" alt="Moment 2"></div>
+                <div class="g-item"><img src="assets/gallery3.jpg" alt="Moment 3"></div>
+                <div class="g-item"><img src="assets/gallery4.jpg" alt="Moment 4"></div>
             </div>
         </div>
     </section>
 
-    <section class="rsvp section-padding text-center">
-        <div class="container">
-            <h2 class="section-title text-white">Join Us</h2>
-            <div class="qr-code-box" data-aos="flip-left">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=SahilAndDreamWedding" alt="QR Code" class="qr-img">
-                <p>Scan to Save Date</p>
+    <footer class="footer">
+        <div class="container text-center">
+            <div class="qr-box">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=SahilAndDreamWedding2026" alt="Scan QR">
+                <p>Scan to get location details</p>
+            </div>
+
+            <div class="rsvp-actions">
+                <a href="assets/invite.pdf" download class="btn-gold"><i class="fas fa-download"></i> Download PDF</a>
+                <a href="whatsapp://send?text=Namaste! You are warmly invited to the wedding of Sahil & Dream on 15th Feb 2026. View invite here: https://your-link.com" class="btn-whatsapp"><i class="fab fa-whatsapp"></i> RSVP on WhatsApp</a>
             </div>
             
-            <div class="action-buttons">
-                <a href="invite.pdf" download class="btn-download"><i class="fas fa-file-pdf"></i> Download Invite</a>
-                <a href="whatsapp://send?text=Join us for the wedding of Sahil & Dream on 15th Feb 2026! Check details here: https://your-website-url.com" class="btn-whatsapp"><i class="fab fa-whatsapp"></i> Share on WhatsApp</a>
-            </div>
+            <p class="copyright">With Love, Budhiraja & Kapoor Family</p>
         </div>
-    </section>
-
-    <footer>
-        <p>With Love, Budhiraja & Kapoor Family</p>
-        <p class="small">Waiting for your presence</p>
     </footer>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
