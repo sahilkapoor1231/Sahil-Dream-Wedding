@@ -18,156 +18,200 @@
 
 <!-- PDF Library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
 </head>
 <body style="background-color: #0F172A;">
 
 <!-- LOADER -->
 <div id="loader">
-    <div class="loader-box">
-        <div class="monogram">S<span class="line"></span>D</div>
-        <div class="loading-bar"><div class="bar-fill"></div></div>
-    </div>
+  <div class="loader-box">
+    <div class="monogram">S<span class="line"></span>D</div>
+    <div class="loading-bar"><div class="bar-fill"></div></div>
+  </div>
 </div>
 
 <!-- MUSIC CONTROL -->
 <div class="music-fab-wrapper">
-    <div class="music-btn" onclick="toggleAudio()">
-        <i class="fas fa-music" id="audio-icon"></i>
-    </div>
-    <div class="pulse" id="pulse-anim"></div>
-    <audio id="bg-music" loop>
-        <source src="assets/audio/background.mp3" type="audio/mp3">
-    </audio>
+  <div class="music-btn" onclick="toggleAudio()">
+    <i class="fas fa-music" id="audio-icon"></i>
+  </div>
+  <div class="pulse" id="pulse-anim"></div>
+
+  <!-- ✅ Remote MP3 -->
+  <audio id="bg-music" loop preload="auto" crossorigin="anonymous">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
 </div>
 
 <main id="capture-area">
 
 <!-- HERO SECTION -->
 <header class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-text" data-aos="zoom-in" data-aos-duration="1500">
-        <img src="assets/images/ornament.svg" class="ornament top" alt="deco">
-        <p class="tagline">WE INVITE YOU TO CELEBRATE</p>
-        <h1 class="names">Sahil <span class="weds-hero">Weds</span> Dream</h1>
-        <p class="date">15 FEBRUARY 2026</p>
-        <p class="venue">NEW DELHI, INDIA</p>
-        <img src="assets/images/ornament.svg" class="ornament bottom" alt="deco">
-    </div>
-    <div class="scroll-down">
-        <span>Scroll Down</span>
-        <i class="fas fa-chevron-down"></i>
-    </div>
+  <div class="hero-bg"></div>
+  <div class="hero-text" data-aos="zoom-in" data-aos-duration="1500">
+
+    <!-- ✅ Remote ornament SVG -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Ornament_divider.svg"
+         class="ornament top" alt="deco" crossorigin="anonymous">
+
+    <p class="tagline">WE INVITE YOU TO CELEBRATE</p>
+    <h1 class="names">Sahil <span class="weds-hero">Weds</span> Dream</h1>
+    <p class="date">15 FEBRUARY 2026</p>
+    <p class="venue">NEW DELHI, INDIA</p>
+
+    <!-- ✅ Remote ornament SVG -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Ornament_divider.svg"
+         class="ornament bottom" alt="deco" crossorigin="anonymous">
+  </div>
+
+  <div class="scroll-down">
+    <span>Scroll Down</span>
+    <i class="fas fa-chevron-down"></i>
+  </div>
 </header>
 
 <!-- INVITE MESSAGE -->
 <section class="section-padding bg-royal">
-    <div class="glass-card" data-aos="fade-up">
-        <img src="https://www.flaticon.com/free-icon/ganesha_4786786?term=hinduism+ganesha&page=1&position=3&origin=search&related_id=4786786" alt="Ganesha">
-        <p class="shloka">|| Shree Ganeshay Namah ||</p>
-        <p class="invite-msg">Mrs. Savita & Mr. Naresh Kapoor <br>cordially invite you to the wedding ceremony of their son</p>
-        <div class="couple-block">
-            <div class="name"><h2>Sahil</h2></div>
-            <div class="connector"><span class="weds-badge">WEDS</span></div>
-            <div class="name"><h2>Dream</h2></div>
-        </div>
-        <p class="invite-msg">(D/o Mrs. Indu & Mr. Suresh Kumar Budhiraja)</p>
+  <div class="glass-card" data-aos="fade-up">
+
+    <!-- ✅ Direct image URL (NOT a flaticon page link) -->
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Ganesha_illustration.svg"
+      alt="Ganesha"
+      style="max-width:90px; display:block; margin:0 auto 12px;"
+      crossorigin="anonymous"
+    >
+
+    <p class="shloka">|| Shree Ganeshay Namah ||</p>
+    <p class="invite-msg">Mrs. Savita & Mr. Naresh Kapoor <br>cordially invite you to the wedding ceremony of their son</p>
+
+    <div class="couple-block">
+      <div class="name"><h2>Sahil</h2></div>
+      <div class="connector"><span class="weds-badge">WEDS</span></div>
+      <div class="name"><h2>Dream</h2></div>
     </div>
+
+    <p class="invite-msg">(D/o Mrs. Indu & Mr. Suresh Kumar Budhiraja)</p>
+  </div>
 </section>
 
 <!-- EVENTS -->
 <section class="section-padding">
-    <h2 class="section-title" data-aos="fade-down">Royal Festivities</h2>
-    <div class="timeline">
+  <h2 class="section-title" data-aos="fade-down">Royal Festivities</h2>
 
-        <!-- EVENTS SECTION -->
-        <section class="section events-section">
-          <!-- Sagan Ceremony -->
-          <div class="event-card" data-aos="fade-right">
-            <div class="event-img">
-              <img src="assets/images/sagan.jpg" alt="Sagan Ceremony">
-            </div>
-            <div class="event-info">
-              <span class="date-badge">05 FEB 2026</span>
-              <h3>Sagan Ceremony</h3>
-              <p class="details"><i class="far fa-clock"></i> 7:00 PM Onwards</p>
-              <p class="loc"><i class="fas fa-map-marker-alt"></i> The City Park Hotel, Pitampura, Delhi</p>
-              <a href="https://maps.app.goo.gl/tqTneLSKnibt8Xx69" target="_blank" class="btn-map">View Map</a>
-            </div>
+  <div class="timeline">
+    <section class="section events-section">
+
+      <!-- Sagan Ceremony -->
+      <div class="event-card" data-aos="fade-right">
+        <div class="event-img">
+          <!-- ✅ Remote photo -->
+          <img
+            src="https://images.unsplash.com/photo-1523438097208-512ae7d59c5b?auto=format&fit=crop&w=1200&q=70"
+            alt="Sagan Ceremony"
+            crossorigin="anonymous"
+          >
+        </div>
+        <div class="event-info">
+          <span class="date-badge">05 FEB 2026</span>
+          <h3>Sagan Ceremony</h3>
+          <p class="details"><i class="far fa-clock"></i> 7:00 PM Onwards</p>
+          <p class="loc"><i class="fas fa-map-marker-alt"></i> The City Park Hotel, Pitampura, Delhi</p>
+          <a href="https://maps.app.goo.gl/tqTneLSKnibt8Xx69" target="_blank" class="btn-map">View Map</a>
+        </div>
+      </div>
+
+      <!-- Mehendi & Sangeet -->
+      <div class="event-card reverse" data-aos="fade-left">
+        <div class="event-img">
+          <!-- ✅ Remote photo -->
+          <img
+            src="https://images.unsplash.com/photo-1606293926249-ed4b3fbd6b99?auto=format&fit=crop&w=1200&q=70"
+            alt="Mehendi & Sangeet"
+            crossorigin="anonymous"
+          >
+        </div>
+        <div class="event-info">
+          <span class="date-badge">13 FEB 2026</span>
+          <h3>Mehendi & Sangeet</h3>
+          <p class="details"><i class="far fa-clock"></i> 5:00 PM Onwards</p>
+          <p class="loc"><i class="fas fa-map-marker-alt"></i> H.No 182, Sec-22, Rohini, Delhi</p>
+          <a href="https://www.google.com/maps/place/Sector+22,+Rohini,+Delhi/" target="_blank" class="btn-map">View Map</a>
+        </div>
+      </div>
+
+      <!-- Haldi Ceremony -->
+      <div class="event-card" data-aos="fade-right">
+        <div class="event-img">
+          <!-- ✅ Remote photo -->
+          <img
+            src="https://images.unsplash.com/photo-1600335895229-6e75511892c8?auto=format&fit=crop&w=1200&q=70"
+            alt="Haldi Ceremony"
+            crossorigin="anonymous"
+          >
+        </div>
+        <div class="event-info">
+          <span class="date-badge gold">15 FEB 2026</span>
+          <h3>Haldi Ceremony</h3>
+          <p class="details"><i class="far fa-clock"></i> 10:00 AM</p>
+          <p class="loc"><i class="fas fa-map-marker-alt"></i> H.No 182, Sec-22, Rohini, Delhi</p>
+          <a href="https://www.google.com/maps/place/Sector+22,+Rohini,+Delhi/" target="_blank" class="btn-map">View Map</a>
+        </div>
+      </div>
+
+      <!-- Wedding Ceremony -->
+      <div class="wedding-card" data-aos="zoom-in">
+        <div class="wedding-overlay"></div>
+        <div class="wedding-content">
+          <div class="badge-main">THE GRAND UNION</div>
+          <h2>The Wedding</h2>
+          <p style="letter-spacing:2px; margin:10px 0;">SUNDAY, 15 FEBRUARY 2026</p>
+          <div style="color:#ccc; margin-bottom:20px;">
+            <span><i class="fas fa-horse"></i> Baraat: 8:00 PM</span> &nbsp;|&nbsp;
+            <span><i class="fas fa-fire"></i> Pheras: Midnight</span>
           </div>
+          <p>Crystal Hall, Golden Apple, Vikas Puri, New Delhi</p>
+          <a href="https://maps.app.goo.gl/AyxrN4zuBKcSpJZ76" target="_blank" class="btn-main">Navigate to Venue</a>
+        </div>
+      </div>
 
-          <!-- Mehendi & Sangeet -->
-          <div class="event-card reverse" data-aos="fade-left">
-            <div class="event-img">
-              <img src="assets/images/mehendi.jpg" alt="Mehendi & Sangeet">
-            </div>
-            <div class="event-info">
-              <span class="date-badge">13 FEB 2026</span>
-              <h3>Mehendi & Sangeet</h3>
-              <p class="details"><i class="far fa-clock"></i> 5:00 PM Onwards</p>
-              <p class="loc"><i class="fas fa-map-marker-alt"></i> H.No 182, Sec-22, Rohini, Delhi</p>
-              <a href="https://www.google.com/maps/place/Sector+22,+Rohini,+Delhi/" target="_blank" class="btn-map">View Map</a>
-            </div>
-          </div>
-
-          <!-- Haldi Ceremony -->
-          <div class="event-card" data-aos="fade-right">
-            <div class="event-img">
-              <img src="assets/images/haldi.jpg" alt="Haldi Ceremony">
-            </div>
-            <div class="event-info">
-              <span class="date-badge gold">15 FEB 2026</span>
-              <h3>Haldi Ceremony</h3>
-              <p class="details"><i class="far fa-clock"></i> 10:00 AM</p>
-              <p class="loc"><i class="fas fa-map-marker-alt"></i> H.No 182, Sec-22, Rohini, Delhi</p>
-              <a href="https://www.google.com/maps/place/Sector+22,+Rohini,+Delhi/" target="_blank" class="btn-map">View Map</a>
-            </div>
-          </div>
-
-          <!-- Wedding Ceremony -->
-          <div class="wedding-card" data-aos="zoom-in">
-            <div class="wedding-overlay"></div>
-            <div class="wedding-content">
-              <div class="badge-main">THE GRAND UNION</div>
-              <h2>The Wedding</h2>
-              <p style="letter-spacing:2px; margin:10px 0;">SUNDAY, 15 FEBRUARY 2026</p>
-              <div style="color:#ccc; margin-bottom:20px;">
-                <span><i class="fas fa-horse"></i> Baraat: 8:00 PM</span> &nbsp;|&nbsp; 
-                <span><i class="fas fa-fire"></i> Pheras: Midnight</span>
-              </div>
-              <p>Crystal Hall, Golden Apple, Vikas Puri, New Delhi</p>
-              <a href="https://maps.app.goo.gl/AyxrN4zuBKcSpJZ76" target="_blank" class="btn-main">Navigate to Venue</a>
-            </div>
-          </div>
-        </section>
-
-    </div>
+    </section>
+  </div>
 </section>
 
 <!-- FOOTER / COUNTDOWN / QR -->
 <footer class="footer">
-    <h2 style="font-family: 'Cinzel', serif; color:var(--gold); text-align:center;">Counting Down</h2>
-    
-    <div id="timer">
-        <div class="box"><span id="days">00</span><small>Days</small></div>
-        <div class="box"><span id="hours">00</span><small>Hrs</small></div>
-        <div class="box"><span id="mins">00</span><small>Mins</small></div>
-        <div class="box"><span id="secs">00</span><small>Secs</small></div>
-    </div>
+  <h2 style="font-family: 'Cinzel', serif; color:var(--gold); text-align:center;">Counting Down</h2>
 
-    <div class="qr-container" style="text-align: center;">
-        <img id="venue-qr" src="assets/images/qr-placeholder.png" alt="Venue QR" style="max-width: 140px; background:white; padding:10px; border-radius:10px;">
-        <p style="color: #666; font-size: 0.8rem; margin-top:5px;">Scan for Location</p>
-    </div>
+  <div id="timer">
+    <div class="box"><span id="days">00</span><small>Days</small></div>
+    <div class="box"><span id="hours">00</span><small>Hrs</small></div>
+    <div class="box"><span id="mins">00</span><small>Mins</small></div>
+    <div class="box"><span id="secs">00</span><small>Secs</small></div>
+  </div>
 
-    <div class="actions">
-        <button id="download-btn" onclick="downloadPDF()" class="btn-action">
-            <i class="fas fa-file-pdf"></i> Save Invite
-        </button>
-        <a href="https://wa.me/919999999999" class="btn-action whatsapp">
-            <i class="fab fa-whatsapp"></i> RSVP
-        </a>
-    </div>
-    <p style="text-align:center; color:#555; font-size:0.8rem; margin-top:40px;">With Love: Kapoor & Budhiraja Family</p>
+  <div class="qr-container" style="text-align: center;">
+    <!-- ✅ QR placeholder image -->
+    <img
+      id="venue-qr"
+      src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https%3A%2F%2Fmaps.app.goo.gl%2FAyxrN4zuBKcSpJZ76"
+      alt="Venue QR"
+      style="max-width: 140px; background:white; padding:10px; border-radius:10px;"
+      crossorigin="anonymous"
+    >
+    <p style="color: #666; font-size: 0.8rem; margin-top:5px;">Scan for Location</p>
+  </div>
+
+  <div class="actions">
+    <button id="download-btn" onclick="downloadPDF()" class="btn-action">
+      <i class="fas fa-file-pdf"></i> Save Invite
+    </button>
+    <a href="https://wa.me/919999999999" class="btn-action whatsapp">
+      <i class="fab fa-whatsapp"></i> RSVP
+    </a>
+  </div>
+
+  <p style="text-align:center; color:#555; font-size:0.8rem; margin-top:40px;">With Love: Kapoor & Budhiraja Family</p>
 </footer>
 
 </main>
