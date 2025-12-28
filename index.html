@@ -21,6 +21,14 @@
 </head>
 <body style="background-color: #0F172A;">
 
+<!-- LOADER -->
+<div id="loader">
+    <div class="loader-box">
+        <div class="monogram">S<span class="line"></span>D</div>
+        <div class="loading-bar"><div class="bar-fill"></div></div>
+    </div>
+</div>
+
 <!-- MUSIC CONTROL -->
 <div class="music-fab-wrapper">
     <div class="music-btn" onclick="toggleAudio()">
@@ -166,40 +174,6 @@
 
 <!-- Scripts -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-AOS.init();
-
-// MUSIC CONTROL
-function toggleAudio() {
-    const audio = document.getElementById('bg-music');
-    const icon = document.getElementById('audio-icon');
-    if (audio.paused) {
-        audio.play();
-        icon.classList.add('playing');
-    } else {
-        audio.pause();
-        icon.classList.remove('playing');
-    }
-}
-
-// COUNTDOWN TIMER
-const countDownDate = new Date("Feb 15, 2026 18:00:00").getTime();
-const timer = setInterval(() => {
-    const now = new Date().getTime();
-    const distance = countDownDate - now;
-
-    document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-    document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000*60*60));
-    document.getElementById("mins").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000*60));
-    document.getElementById("secs").innerText = Math.floor((distance % (1000 * 60)) / 1000);
-}, 1000);
-
-// PDF DOWNLOAD
-function downloadPDF() {
-    const element = document.getElementById('capture-area');
-    html2pdf().from(element).save('Wedding-Invite.pdf');
-}
-</script>
 <script src="script.js"></script>
 </body>
 </html>
